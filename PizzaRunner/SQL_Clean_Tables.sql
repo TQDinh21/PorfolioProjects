@@ -1,8 +1,9 @@
 -- create clean customer order table
 
-CREATE TEMPORARY Table cleaned_customer_orders
-AS
-SELECT *
+SELECT 
+    order_id,
+    customer_id,
+    pizza_id,
     CASE
         WHEN exclusions = 'null' THEN null
         ELSE exclusions
@@ -12,8 +13,8 @@ SELECT *
         ELSE extras
     END as extras,
     order_time
-FROM clean_customer_order
-
+INTO #cleaned_customer_orders
+FROM customer_orders;
 
 
 --Create clean runner_orders table
